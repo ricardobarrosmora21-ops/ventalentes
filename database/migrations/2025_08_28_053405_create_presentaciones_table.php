@@ -13,8 +13,19 @@ return new class extends Migration
     {
         Schema::create('presentaciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('caracteristica_id')->constrained('caracteristicas')->onDelete('cascade');
-            $table->timestamps();
+
+            // Relación con características
+            $table->foreignId('caracteristica_id')
+                  ->constrained('caracteristicas')
+                  ->onDelete('cascade');
+
+            // Campos principales de la tabla
+            $table->string('nombre', 60);
+            $table->string('descripcion', 255)->nullable();
+            $table->boolean('estado')->default(1);    // Activo = 1, Inactivo = 0
+            $table->boolean('destacado')->default(0); // Destacado = 1, No = 0
+
+            $table->timestamps(); // created_at y updated_at
         });
     }
 

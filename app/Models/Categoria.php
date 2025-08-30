@@ -13,6 +13,8 @@ class Categoria extends Model
 
     protected $fillable = [
         'caracteristica_id',
+        'nombre',
+        'descripcion',
     ];
 
 

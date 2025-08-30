@@ -13,7 +13,18 @@ return new class extends Migration
     {
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('caracteristica_id')->constrained('caracteristicas')->onDelete('cascade');
+
+            // Relación con características
+            $table->foreignId('caracteristica_id')
+                ->constrained('caracteristicas')
+                ->onDelete('cascade');
+
+            // Campos propios de la categoría
+            $table->string('nombre', 100);
+            $table->string('descripcion', 255)->nullable();
+            $table->boolean('estado')->default(1);
+            $table->boolean('destacado')->default(0);
+
             $table->timestamps();
         });
     }
