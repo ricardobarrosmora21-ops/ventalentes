@@ -10,7 +10,7 @@ class Caracteristica extends Model
     use HasFactory;
 
     protected $table = 'caracteristicas';
-    //
+
     protected $fillable = [
         'nombre',
         'descripcion',
@@ -18,7 +18,7 @@ class Caracteristica extends Model
         'destacado',
     ];
 
-    //Relaciones tablas
+    // Relaciones
     public function categorias()
     {
         return $this->hasMany(Categoria::class);

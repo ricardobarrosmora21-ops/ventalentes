@@ -9,14 +9,13 @@ class Marca extends Model
 {
     use HasFactory;
 
-    //
     protected $table = 'marcas';
 
     protected $fillable = [
         'caracteristica_id',
     ];
 
-    //Relaciones tablas
+    // Relaciones
     public function caracteristica()
     {
         return $this->belongsTo(Caracteristica::class);

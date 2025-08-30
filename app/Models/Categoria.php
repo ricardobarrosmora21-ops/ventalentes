@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Categoria extends Model
 {
     use HasFactory;
-    //
+
     protected $table = 'categorias';
 
     protected $fillable = [
@@ -17,8 +17,7 @@ class Categoria extends Model
         'descripcion',
     ];
 
-
-    //Relaciones tablas
+    // Relaciones
     public function caracteristica()
     {
         return $this->belongsTo(Caracteristica::class);
