@@ -1,54 +1,49 @@
 <!DOCTYPE html>
-<html :class="{ 'theme-dark': dark }" x-data="data()" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Sistema - @yield('title')</title>
-
-
-    {{-- cdns  --}}
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" /> --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script> --}}
-
-
-    {{-- scripts locales  --}}
-    <script src="{{ asset('js/init-alpine.js') }}"></script>
-    {{-- <script src="{{ asset('js/charts-lines.js') }}" defer></script> --}}
-    {{-- <script src="{{ asset('js/charts-pie.js') }}" defer></script> --}}
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    @stack('css')
 </head>
 
 <body class="font-sans antialiased">
-    <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div class="min-h-screen bg-gray-100">
+        @include('layouts.navigation')
 
-        @include('layouts.navigation-menu')
-
-        <div class="flex flex-col flex-1 w-full">
-
-            @include('layouts.navigation-header')
-
-            <main class="h-full overflow-y-auto">
-                <div class="container px-6 mx-auto grid">
-                    {{ $slot }}
+        <!-- Page Heading -->
+        @isset($header)
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
                 </div>
-            </main>
-        </div>
+            </header>
+        @endisset
+
+        <!-- Auth Links (Login/Register) -->
+        @guest
+            <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-end space-x-4">
+              
+            </div>
+        @endguest
+
+        <!-- Page Content -->
+        <main>
+            @yield('content')
+        </main>
     </div>
 
-    @stack('js')
+    <!-- Aquí van los scripts extras -->
+    @stack('scripts')
 </body>
 
 </html>

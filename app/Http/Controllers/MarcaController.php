@@ -1,137 +1,110 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMarcaRequest;
-use App\Http\Requests\UpdateMarcaRequest;
-use App\Models\Caracteristica;
 use App\Models\Marca;
-use Exception;
+use App\Models\Caracteristica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 class MarcaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
-        $marcas = Marca::with('caracteristica')->latest()->get();
-        return view('marcas.index', ['marcas' => $marcas]);
+        $marcas = Marca::orderBy('id', 'asc')->get(); // ✅ orden por ID de creación
+        return view('marcas.index', compact('marcas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $caracteristicas = Caracteristica::all();
+        return view('marcas.create', compact('caracteristicas'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreMarcaRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:100',
+            'descripcion' => 'nullable|string|max:255',
+            'destacado' => 'nullable|boolean',
+        ]);
+
         try {
             DB::beginTransaction();
 
-            // Crear la característica
-            $caracteristica = Caracteristica::create([
+            // Buscar o crear característica
+            $caracteristica = Caracteristica::firstOrCreate(
+                ['nombre' => $request->input('nombre')],
+                [
+                    'descripcion' => $request->input('descripcion'),
+                    'destacado' => $request->has('destacado') ? 1 : 0,
+                ]
+            );
+
+            // Crear la marca
+            $marca = Marca::create([
                 'nombre' => $request->input('nombre'),
                 'descripcion' => $request->input('descripcion'),
-                'destacado' => $request->input('destacado', 0), // Por defecto, será 0 si no está marcado
+                'caracteristica_id' => $caracteristica->id,
+                'estado' => 1,
+                'destacado' => $request->has('destacado') ? 1 : 0,
             ]);
 
-            // Crear la marca asociada
-            $marca = $caracteristica->marcas()->create([
-                'caracteristica_id' => $caracteristica->id
-            ]);
             DB::commit();
 
-            // Retornar respuesta JSON
-            return response()->json([
-                'success' => true,
-                'message' => 'Marca registrada con éxito.',
-                'data' => $marca // Incluye la información de la marca
-            ]);
+            return redirect()->route('marcas.index')->with('success', 'Marca creada correctamente.');
         } catch (Exception $e) {
             DB::rollBack();
-            // Retornar error en JSON
-            return response()->json([
-                'success' => false,
-                'message' => 'Error al registrar la marca.',
-                'error' => $e->getMessage() // Opcional
-            ], 500);
+            return redirect()->back()->withErrors(['error' => 'Error al registrar la marca: ' . $e->getMessage()]);
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Marca $marca)
     {
-        // Cargar la categoría con la relación de características
         $marca->load('caracteristica');
+        return view('marcas.show', compact('marca'));
+    }
 
-        return response()->json([
-            'success' => true,
-            'data' => $marca,
+    public function edit(Marca $marca)
+    {
+        $caracteristicas = Caracteristica::all();
+        return view('marcas.edit', compact('marca', 'caracteristicas'));
+    }
+
+
+    public function update(Request $request, Marca $marca)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:100',
+            'descripcion' => 'nullable|string|max:255',
+            'caracteristica_id' => 'required|exists:caracteristicas,id',
         ]);
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateMarcaRequest $request, $id)
-    {
-        //
         try {
             DB::beginTransaction();
 
-            $marca = Marca::findOrFail($id);
-
-            $caracteristica = $marca->caracteristica;
-
-            $caracteristica->update([
+            $marca->update([
                 'nombre' => $request->input('nombre'),
                 'descripcion' => $request->input('descripcion'),
-                'destacado' => $request->input('destacado'), // Por defecto, será 0 si no está marcado
+                'caracteristica_id' => $request->input('caracteristica_id'),
             ]);
 
             DB::commit();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Marca actualizada con éxito.',
-                'data' => $caracteristica,
-            ], 200);
-        } catch (\Exception $e) {
+            return redirect()->route('marcas.index')->with('success', 'Marca actualizada correctamente.');
+        } catch (Exception $e) {
             DB::rollBack();
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Error al actualizar la marca: ' . $e->getMessage(),
-            ], 500);
+            return redirect()->back()->withErrors(['error' => 'Error al actualizar la marca: ' . $e->getMessage()]);
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Marca $marca)
     {
-        //
+        try {
+            $marca->delete();
+            return redirect()->route('marcas.index')->with('success', 'Marca eliminada correctamente.');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Error al eliminar la marca: ' . $e->getMessage()]);
+        }
     }
 }

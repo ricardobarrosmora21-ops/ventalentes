@@ -1,7 +1,7 @@
 <!-- Desktop sidebar -->
-<aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
-  <div class="py-4 text-gray-500 dark:text-gray-400">
-    <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
+<aside class="z-20 hidden w-64 overflow-y-auto bg-white md:block flex-shrink-0">
+  <div class="py-4 text-gray-500">
+    <a class="ml-6 text-lg font-bold text-gray-800" href="#">
       Codart S's
     </a>
     <ul class="mt-6">
@@ -10,7 +10,7 @@
         <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
               aria-hidden="true"></span>
         <a href="{{route('dashboard')}}"
-           class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100">
+           class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800">
           <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
                stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
             <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
@@ -22,7 +22,7 @@
       <!-- Gestión de Usuarios -->
       <li class="relative px-6 py-3">
         <a href="{{route('usuarios.index')}}"
-           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800">
           <i class="fa-regular fa-user"></i>
           <span class="ml-4">Usuarios</span>
         </a>
@@ -31,7 +31,7 @@
       <!-- Productos -->
       <li class="relative px-6 py-3">
         <a href="{{route('productos.index')}}"
-           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800">
           <i class="fa-solid fa-glasses"></i>
           <span class="ml-4">Productos</span>
         </a>
@@ -40,7 +40,7 @@
       <!-- Clientes -->
       <li class="relative px-6 py-3">
         <a href="{{route('clientes.index')}}"
-           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800">
           <i class="fa-regular fa-id-card"></i>
           <span class="ml-4">Clientes</span>
         </a>
@@ -49,7 +49,7 @@
       <!-- Ventas -->
       <li class="relative px-6 py-3">
         <a href="{{route('ventas.index')}}"
-           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800">
           <i class="fa-solid fa-cash-register"></i>
           <span class="ml-4">Ventas</span>
         </a>
@@ -58,7 +58,7 @@
       <!-- Reportes -->
       <li class="relative px-6 py-3">
         <a href="{{route('reportes.index')}}"
-           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800">
           <i class="fa-solid fa-chart-line"></i>
           <span class="ml-4">Reportes</span>
         </a>
@@ -67,7 +67,7 @@
       <!-- Categorías -->
       <li class="relative px-6 py-3">
         <a href="{{route('categorias.index')}}"
-           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800">
           <i class="fa-regular fa-folder-open"></i>
           <span class="ml-4">Categorias</span>
         </a>
@@ -76,7 +76,7 @@
       <!-- Ejemplos extras (Forms, Cards, Charts, etc. como plantilla original) -->
       <li class="relative px-6 py-3">
         <a href="forms.html"
-           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800">
           <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
                stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
             <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
@@ -86,7 +86,7 @@
       </li>
       <li class="relative px-6 py-3">
         <a href="charts.html"
-           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+           class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800">
           <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
                stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
             <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
@@ -99,7 +99,7 @@
       <!-- Submenú ejemplo -->
       <li class="relative px-6 py-3" x-data="{ isPagesMenuOpen: false }">
         <button @click="isPagesMenuOpen = !isPagesMenuOpen"
-                class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800">
           <span class="inline-flex items-center">
             <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
                  stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -122,11 +122,11 @@
             x-transition:leave="transition-all ease-in-out duration-300"
             x-transition:leave-start="opacity-100 max-h-96"
             x-transition:leave-end="opacity-0 max-h-0"
-            class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+            class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
             aria-label="submenu">
-          <li><a href="pages/login.html" class="block px-2 py-1 hover:text-gray-800 dark:hover:text-gray-200">Login</a></li>
-          <li><a href="pages/create-account.html" class="block px-2 py-1 hover:text-gray-800 dark:hover:text-gray-200">Create Account</a></li>
-          <li><a href="pages/404.html" class="block px-2 py-1 hover:text-gray-800 dark:hover:text-gray-200">404</a></li>
+          <li><a href="pages/login.html" class="block px-2 py-1 hover:text-gray-800">Login</a></li>
+          <li><a href="pages/create-account.html" class="block px-2 py-1 hover:text-gray-800">Create Account</a></li>
+          <li><a href="pages/404.html" class="block px-2 py-1 hover:text-gray-800">404</a></li>
         </ul>
       </li>
     </ul>

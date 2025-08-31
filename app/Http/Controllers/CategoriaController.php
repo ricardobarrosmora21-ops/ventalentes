@@ -13,7 +13,7 @@ class CategoriaController extends Controller
     public function index()
     {
         $categorias = Categoria::latest()->paginate(10);
-        return view('categoria.index', compact('categorias'));
+        return view('categorias.index', compact('categorias'));
     }
 
     /**
@@ -21,7 +21,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        return view('categoria.create');
+        return view('categorias.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class CategoriaController extends Controller
      */
     public function show(Categoria $categoria)
     {
-        return view('categoria.show', compact('categoria'));
+        return view('categorias.show', compact('categoria'));
     }
 
     /**
@@ -53,7 +53,7 @@ class CategoriaController extends Controller
      */
     public function edit(Categoria $categoria)
     {
-        return view('categoria.edit', compact('categoria'));
+        return view('categorias.edit', compact('categoria'));
     }
 
     /**
