@@ -12,7 +12,7 @@
     </style>
 </head>
 <body>
-    <h2>Factura #{{ $factura->numero }}</h2>
+    <h2>Factura #{{ $factura->id}}</h2>
     <p><strong>Cliente:</strong> {{ $factura->cliente->nombre }}</p>
     <p><strong>Fecha:</strong> {{ \Carbon\Carbon::parse($factura->fecha)->format('d/m/Y') }}</p>
     <p><strong>Total:</strong> ${{ number_format($factura->total, 2) }}</p>

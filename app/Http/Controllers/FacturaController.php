@@ -31,11 +31,15 @@ class FacturaController extends Controller
             'fecha' => 'required|date',
         ]);
 
+        $ultimoNumero = Factura::max('numero') ?? 0;
+        $nuevoNumero = $ultimoNumero + 1;
+
         $factura = Factura::create([
-            'user_id'    => auth()->id(), // 🔥 ahora sí se guarda
+            'user_id' => auth()->id(),
             'cliente_id' => $request->cliente_id,
-            'fecha'      => $request->fecha,
-            'total'      => 0,
+            'fecha' => $request->fecha,
+            'numero' => $nuevoNumero,
+            'total' => 0,
         ]);
 
         $total = 0;
@@ -44,11 +48,11 @@ class FacturaController extends Controller
             foreach ($request->detalles as $detalle) {
                 $subtotal = $detalle['cantidad'] * $detalle['precio_unitario'];
                 DetalleFactura::create([
-                    'factura_id'       => $factura->id,
-                    'presentacion_id'  => $detalle['presentacion_id'],
-                    'cantidad'         => $detalle['cantidad'],
-                    'precio_unitario'  => $detalle['precio_unitario'],
-                    'subtotal'         => $subtotal,
+                    'factura_id' => $factura->id,
+                    'presentacion_id' => $detalle['presentacion_id'],
+                    'cantidad' => $detalle['cantidad'],
+                    'precio_unitario' => $detalle['precio_unitario'],
+                    'subtotal' => $subtotal,
                 ]);
                 $total += $subtotal;
             }
@@ -92,11 +96,11 @@ class FacturaController extends Controller
             foreach ($request->detalles as $detalle) {
                 $subtotal = $detalle['cantidad'] * $detalle['precio_unitario'];
                 DetalleFactura::create([
-                    'factura_id'       => $factura->id,
-                    'presentacion_id'  => $detalle['presentacion_id'],
-                    'cantidad'         => $detalle['cantidad'],
-                    'precio_unitario'  => $detalle['precio_unitario'],
-                    'subtotal'         => $subtotal,
+                    'factura_id' => $factura->id,
+                    'presentacion_id' => $detalle['presentacion_id'],
+                    'cantidad' => $detalle['cantidad'],
+                    'precio_unitario' => $detalle['precio_unitario'],
+                    'subtotal' => $subtotal,
                 ]);
                 $total += $subtotal;
             }
